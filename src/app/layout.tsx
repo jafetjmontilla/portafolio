@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: "Portafolio de Jafet Montilla",
     images: [
       {
-        url: `${url}/fotoperfil.jpeg`, // Asume que fotoperfil.jpeg está en la carpeta /public
+        url: `https://i.ibb.co/4wd4s4Mh/dev.png`,
         width: 800,
         height: 800,
       },
@@ -38,13 +38,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: title,
     description: description,
-    images: [`${url}/fotoperfil.jpeg`],
+    images: [`https://i.ibb.co/4wd4s4Mh/dev.png`],
   },
   icons: {
     icon: '/dev.png',
   },
-  // Opcional: añade más metadatos si lo necesitas
-  // themeColor: '#0a0a0a',
+  other: {
+    'og:logo': 'https://i.ibb.co/4wd4s4Mh/dev.png',
+  }
 };
 
 export default function RootLayout({
