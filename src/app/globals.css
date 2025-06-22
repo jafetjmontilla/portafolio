@@ -24,3 +24,32 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 300ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.ReactModal__Content {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+.ReactModal__Content--after-open {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.ReactModal__Content--before-close {
+  opacity: 0;
+  transform: scale(0.95);
+}
