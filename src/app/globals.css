@@ -53,3 +53,11 @@ body {
   opacity: 0;
   transform: scale(0.95);
 }
+
+/* Swiper Navigation Customization */
+.image-carousel {
+  --swiper-navigation-color: #9ca3af;
+  /* gray-400 */
+  --swiper-navigation-size: 22px;
+  /* Half of default 44px */
+}
