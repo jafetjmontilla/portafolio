@@ -2,6 +2,12 @@
 
 import Modal from 'react-modal';
 import Image from 'next/image';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination } from 'swiper/modules';
+
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
 if (typeof window !== 'undefined') {
   Modal.setAppElement('body');
@@ -10,10 +16,11 @@ if (typeof window !== 'undefined') {
 interface ImageModalProps {
   isOpen: boolean;
   onRequestClose: () => void;
-  imageUrl: string;
+  imageUrls: string[];
+  initialSlide: number;
 }
 
-const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onRequestClose, imageUrl }) => {
+const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onRequestClose, imageUrls, initialSlide }) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -35,19 +42,33 @@ const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onRequestClose, imageUr
       contentLabel="Image Modal"
     >
       <div className="relative w-full h-full max-w-4xl max-h-[70vh] rounded-lg p-10 bg-gray-800">
-        {imageUrl && (
-          <div className="w-[90%] h-[90%] m-10 relative">
-            <Image
-              src={imageUrl}
-              alt="Vista ampliada"
-              fill
-              className="object-contain"
-            />
-          </div>
-        )}
+        <Swiper
+          modules={[Navigation, Pagination]}
+          spaceBetween={50}
+          slidesPerView={1}
+          navigation
+          pagination={{ clickable: true }}
+          initialSlide={initialSlide}
+          className="w-full h-full"
+        >
+          {imageUrls.map((url, index) => (
+            <SwiperSlide key={index}>
+              <div className="w-full h-full flex items-center justify-center">
+                <div className="relative w-[90%] h-[90%]">
+                  <Image
+                    src={url}
+                    alt={`Vista ampliada ${index + 1}`}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
         <button
           onClick={onRequestClose}
-          className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 w-10 h-10 flex items-center justify-center cursor-pointer hover:bg-gray-900 transition-all duration-300"
+          className="absolute top-4 right-4 text-white bg-black bg-opacity-50 rounded-full p-2 w-10 h-10 flex items-center justify-center cursor-pointer hover:bg-gray-900 transition-all duration-300 z-10"
         >
           X
         </button>

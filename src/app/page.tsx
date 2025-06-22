@@ -8,17 +8,20 @@ import TechnologiesModal from "@/app/components/TechnologiesModal";
 
 export default function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState('');
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [techModalIsOpen, setTechModalIsOpen] = useState(false);
 
-  const openModal = (imageUrl: string) => {
-    setSelectedImage(imageUrl);
+  const openModal = (images: string[], index: number) => {
+    setSelectedImages(images);
+    setSelectedImageIndex(index);
     setModalIsOpen(true);
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
-    setSelectedImage('');
+    setSelectedImages([]);
+    setSelectedImageIndex(0);
   };
 
   const openTechModal = () => setTechModalIsOpen(true);
@@ -102,7 +105,7 @@ export default function Home() {
                 <div className="mt-6 flex-grow">
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 h-full">
                     {project.screenshots.map((screenshot, i) => (
-                      <div key={i} className="relative aspect-video cursor-pointer" onClick={() => openModal(screenshot)}>
+                      <div key={i} className="relative aspect-video cursor-pointer" onClick={() => openModal(project.screenshots, i)}>
                         <Image
                           src={screenshot}
                           alt={`Captura de pantalla de ${project.title} ${i + 1}`}
@@ -122,7 +125,8 @@ export default function Home() {
       <ImageModal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        imageUrl={selectedImage}
+        imageUrls={selectedImages}
+        initialSlide={selectedImageIndex}
       />
       <TechnologiesModal
         isOpen={techModalIsOpen}
