@@ -42,6 +42,16 @@ export default function Home() {
             <p className="mt-4 text-lg text-gray-400">
               Desarrollador de software apasionado, analítico y comprometido con los más altos estándares de excelencia para la generación de productos robustos, eficientes y enfocados en una experiencia de usuario óptima. Especializado en el desarrollo de soluciones end-to-end a través de React y Node.JS, entre otras tecnologías.
             </p>
+            <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-x-6 gap-y-2 text-base text-gray-300 justify-center md:justify-start">
+              <a href="mailto:jafetmontilla@gmail.com" className="flex items-center hover:text-white">
+                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                jafetmontilla@gmail.com
+              </a>
+              <a href="tel:+584246158537" className="flex items-center hover:text-white">
+                <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.518.759a11.024 11.024 0 006.138 6.138l.759-1.518a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
+                +58 424-6158537
+              </a>
+            </div>
             <div className="mt-8 flex justify-center md:justify-start gap-4">
               <a href="https://www.linkedin.com/in/jafet-montilla-940127258/" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
                 LinkedIn
@@ -56,7 +66,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="experiencia" className="py-20">
+        <section id="experiencia" className="pt-0 pb-20">
           <h2 className="text-3xl font-bold text-center mb-12">Experiencia Laboral</h2>
           <div className="grid grid-cols-1 md:grid-cols-1 gap-16">
             {projects.map((project, index) => (
@@ -79,9 +89,14 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="mt-4">
-                    <a href={project.url} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
-                      Ver Proyecto
-                    </a>
+                    <h4 className="font-semibold">Enlaces:</h4>
+                    <div className="flex flex-wrap gap-x-4 gap-y-2 mt-2">
+                      {project.urls && project.urls.map((url, i) => (
+                        <a key={i} href={url.link} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">
+                          {url.label}
+                        </a>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 <div className="mt-6 flex-grow">
